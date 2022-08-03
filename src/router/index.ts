@@ -23,11 +23,17 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/main/home',
         name: 'Home',
+        meta: {
+          name: '首页',
+        },
         component: () => import('@/views/main/home/Home.vue'),
       },
       {
         path: '/main/student',
         name: 'Student',
+        meta: {
+          name: '学生信息',
+        },
         component: () => import('@/views/main/student/Student.vue'),
       },
       {

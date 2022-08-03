@@ -34,6 +34,7 @@ import NavHeader from "@/components/nav-header/NavHeader.vue"
 
   .main {
     background-color: #f0f2f5;
+    overflow: hidden;
   }
 
   .aside-left {

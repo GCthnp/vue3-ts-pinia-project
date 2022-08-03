@@ -11,16 +11,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, getCurrentInstance, onMounted } from "vue"
-import type { ComponentInternalInstance, InstanceType } from "vue"
+import { ref, reactive, getCurrentInstance } from "vue"
 import { useRoute, useRouter } from 'vue-router'
 import type { FormInstance, FormRules } from 'element-plus'
 import type { userFormType } from "./LoginType"
 import { login } from "@/serves/api";
 
 const router = useRouter()
-
-let instance = ref<InstanceType>()
+const instance = getCurrentInstance()
 const userFormRef = ref<FormInstance>()
 const userForm = reactive<userFormType>({
   name: "admin",
@@ -52,21 +50,17 @@ const nowLogin = async () => {
     const res = await login(userForm)
     if (res.code == 200) {
       // instance.appContext.config.globalProperties.$message.success(res.message)
-      instance.proxy.$message.success(res.message)
+      instance?.proxy?.$message.success(res.message)
       localStorage.setItem("testToken", res.token)
       localStorage.setItem("testUser", JSON.stringify(userForm))
       router.replace("/main")
     } else {
-      instance.proxy.$message.error(res.message)
+      instance?.proxy?.$message.error(res.message)
     }
   } catch (error) {
-    instance.proxy.$message.error(error)
+    instance?.proxy?.$message.error(error)
   }
 }
-
-onMounted(() => {
-  instance = getCurrentInstance()
-})
 
 defineExpose({
   userFormValidate

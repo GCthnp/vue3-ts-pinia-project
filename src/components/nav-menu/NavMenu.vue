@@ -5,9 +5,9 @@
       <span v-show="!isCollapse" class="title">Vue3+TS</span>
     </div>
     <el-menu :collapse="isCollapse" router :default-active="currentRoute" class="el-menu-vertical-demo"
-      background-color="#545c64" text-color="#fff" @select="handleSelect">
+      background-color="#545c64" text-color="#fff">
       <template v-for="item in navMenu">
-        <el-menu-item v-if="!item.children" @click="clickMenuItem" :index="item.path" :key="item.path">
+        <el-menu-item v-if="!item.children" :index="item.path" :key="item.path">
           <el-icon>
             <component :is="item.icon" />
           </el-icon>
@@ -33,32 +33,20 @@
   </div>
 </template>
 <script setup lang='ts'>
-import { ref, onMounted } from "vue";
+import { ref, getCurrentInstance } from "vue";
 import { useRoute } from 'vue-router'
 import navMenu from "@/util/navMenu"
+
 const route = useRoute()
+const instance = getCurrentInstance()
+
+instance?.proxy?.$Bus.on('isShowNavMenu', () => {
+  isCollapse.value = !isCollapse.value
+})
+
 
 let currentRoute = ref(route.path)
 let isCollapse = ref(false)
-
-// onMounted(() => {
-//   currentRoute = route.path
-//   console.log(currentRoute);
-
-// })
-
-const handleSelect = (key: string) => {
-  // currentRoute = key
-  console.log(currentRoute, "=-----------");
-
-}
-
-const clickMenuItem = (currentInstance) => {
-  console.log(currentInstance);
-
-  // currentRoute = currentInstance.index
-}
-
 
 
 
