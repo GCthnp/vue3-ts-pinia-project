@@ -14,7 +14,7 @@
   </el-card>
 </template>
 <script setup lang='ts'>
-import { ref, onMounted } from "vue"
+import { ref, onMounted, getCurrentInstance } from "vue"
 import { useCovidInfoStore } from "@/stores/userInfo"
 
 import ChinaMap from "./childrens/ChinaMap.vue";
@@ -24,14 +24,22 @@ import PieCharts from "./childrens/PieCharts.vue";
 import LineCharts from "./childrens/LineCharts.vue";
 
 const covidInfoStore = useCovidInfoStore()
+const instance = getCurrentInstance()
 
 const chinaMapRef = ref<InstanceType<typeof ChinaMap>>()
 const pieChartsRef = ref<InstanceType<typeof PieCharts>>()
 
 const LineChartsRef = ref<InstanceType<typeof LineCharts>>()
+const province = ref<string>('')
+
+instance?.proxy?.$Bus.on('showAreaCovid', (city: any) => {
+  province.value = city
+})
 
 onMounted(async () => {
+
   await covidInfoStore.getCovidList()
+  covidInfoStore.setCityItem(province.value)
   chinaMapRef.value?.initCharts()
   pieChartsRef.value?.initPie()
   LineChartsRef.value?.initLine()

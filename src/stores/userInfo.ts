@@ -6,6 +6,7 @@ import type {
   ChinaTotal,
   ChinaAdd,
   StatisGradeCityDetail,
+  AreaTree,
 } from './type'
 
 export const useCovidInfoStore = defineStore({
@@ -16,6 +17,7 @@ export const useCovidInfoStore = defineStore({
     chinaAdd: <ChinaAdd>{},
     chinaTotal: <ChinaTotal>{},
     cityDetail: <StatisGradeCityDetail[]>[],
+    allAreaTree: <AreaTree[]>[],
   }),
   getters: {},
   actions: {
@@ -31,8 +33,15 @@ export const useCovidInfoStore = defineStore({
       this.cityDetail = allCityDetail
         .sort((a, b) => b.nowConfirm - a.nowConfirm)
         .splice(0, 10)
-
-      console.log(this.list.statisGradeCityDetail)
+      this.allAreaTree = this.list.diseaseh5Shelf.areaTree[0].children
+    },
+    setCityItem(city: string) {
+      console.log(city)
+      // console.log(this.allAreaTree)
+      let cityItem = this.allAreaTree.find((item) => city.includes(item.name))
+      if (cityItem) {
+        this.item = cityItem?.children
+      }
     },
   },
 })

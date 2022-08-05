@@ -13,4 +13,8 @@ const reqWeather = (parameters: any) =>
 const reqIp = () =>
   API.GET('http://restapi.amap.com/v3/ip?key=55914c864c118ff8634f2789926785f3')
 
-export { login, getList, reqWeather, reqIp }
+const getStudentList = () => {
+  return API.GET('/api/students')
+}
+
+export { login, getList, reqWeather, reqIp, getStudentList }

@@ -46,6 +46,7 @@ const route = useRoute()
 const router = useRouter()
 const userName: string = JSON.parse(localStorage.getItem("testUser") || '').name
 const openMenu = ref<boolean>(true)  //控制菜单栏展开收起
+
 let weatherInfo = reactive<any>({
   lives: {}
 })
@@ -77,6 +78,8 @@ const getIp = async () => {
   try {
     let res = await reqIp()
     console.log(res);
+    let province: string = res.province
+    instance?.proxy?.$Bus.emit('showAreaCovid', province)
     if (res.status == "1") {
       getWeather(res.adcode)
     }
