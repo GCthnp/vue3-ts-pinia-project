@@ -71,8 +71,8 @@ const options = [
             label: '18本软件2班',
           },
           {
-            value: '18本软件2班',
-            label: '18本软件2班',
+            value: '17专计网1班',
+            label: '17专计网1班',
           }
         ],
       },

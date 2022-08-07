@@ -38,8 +38,10 @@ instance?.proxy?.$Bus.on('showAreaCovid', (city: any) => {
 
 onMounted(async () => {
 
-  await covidInfoStore.getCovidList()
-  covidInfoStore.setCityItem(province.value)
+  if (!covidInfoStore.list || !covidInfoStore.list.diseaseh5Shelf) {
+    await covidInfoStore.getCovidList()
+    covidInfoStore.setCityItem(province.value)
+  }
   chinaMapRef.value?.initCharts()
   pieChartsRef.value?.initPie()
   LineChartsRef.value?.initLine()

@@ -3,25 +3,21 @@ import type { RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
-    redirect: 'main',
-  },
-  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/login/index.vue'),
   },
   {
-    path: '/main',
+    path: '/',
     name: 'Main',
     component: () => import('@/views/main/Main.vue'),
     children: [
       {
-        path: '/main',
-        redirect: '/main/home',
+        path: '/',
+        redirect: '/home',
       },
       {
-        path: '/main/home',
+        path: '/home',
         name: 'Home',
         meta: {
           name: '首页',
@@ -29,7 +25,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/main/home/Home.vue'),
       },
       {
-        path: '/main/student',
+        path: '/student',
         name: 'Student',
         meta: {
           name: '学生信息',
@@ -37,11 +33,18 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/main/student/Student.vue'),
       },
       {
-        path: '/main/test',
-        name: 'Test',
-        component: () => import('@/views/main/home/Home.vue'),
+        path: '/grade',
+        name: 'Grade',
+        meta: {
+          name: '学生成绩',
+        },
+        component: () => import('@/views/main/student/Grade.vue'),
       },
     ],
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/views/NotFound.vue'),
   },
 ]
 

@@ -11,8 +11,8 @@ interface MenuMeta {
 }
 const navMenu: Array<RootObject> = [
   {
-    id: '/main/home',
-    path: '/main/home',
+    id: '/home',
+    path: '/home',
     name: '首页',
     icon: 'House',
     meta: {
@@ -29,31 +29,22 @@ const navMenu: Array<RootObject> = [
     },
     children: [
       {
-        id: '/main/student',
-        path: '/main/student',
+        id: '/student',
+        path: '/student',
         name: '学生信息',
         meta: {
           name: '学生信息',
         },
       },
       {
-        id: '/main/grade',
-        path: '/main/grade',
+        id: '/grade',
+        path: '/grade',
         name: '学生成绩',
         meta: {
           name: '学生成绩',
         },
       },
     ],
-  },
-  {
-    id: '/main/test',
-    path: '/main/test',
-    name: '测试',
-    icon: 'Monitor',
-    meta: {
-      name: '测试',
-    },
   },
 ]
 

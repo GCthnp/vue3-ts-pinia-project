@@ -1,13 +1,27 @@
 <template>
   <div class="left-box-card">
     <section>
-      <div>较上日+ {{ covidInfoStore.chinaAdd.localConfirmH5 }}</div>
-      <div>{{ covidInfoStore.chinaTotal.localConfirm }}</div>
+      <div>较上日+
+        <countTo :startVal='0' :endVal='200' :duration='500'></countTo>
+
+      </div>
+
+      <div>
+        {{ covidInfoStore.chinaTotal.localConfirm }}
+
+      </div>
+
       <div>本土现有确诊</div>
     </section>
     <section>
-      <div>较上日+ {{ covidInfoStore.chinaAdd.nowConfirm }}</div>
-      <div>{{ covidInfoStore.chinaTotal.nowConfirm }}</div>
+      <div>较上日+
+
+        {{ covidInfoStore.chinaAdd.nowConfirm }}
+      </div>
+      <div>
+        {{ covidInfoStore.chinaTotal.nowConfirm }}
+
+      </div>
       <div>现有确诊</div>
     </section>
     <section>
@@ -34,6 +48,8 @@
 </template>
 <script setup lang='ts'>
 import { useCovidInfoStore } from "@/stores/userInfo"
+
+
 const covidInfoStore = useCovidInfoStore()
 </script>
 <style scoped lang="less">

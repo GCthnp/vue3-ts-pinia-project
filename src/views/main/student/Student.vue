@@ -109,7 +109,8 @@ const initStudentTable = async () => {
   }
 }
 const handleDelete = (index: number, row: AddEditStudentFormType) => {
-  studentTableData.value?.splice(index, 1)
+  // studentTableData.value?.splice(index, 1)
+  paginationData.value?.splice(index, 1)
 }
 const handleEdit = (index: number, row: AddEditStudentFormType) => {
   editStudent.value = row
@@ -117,7 +118,8 @@ const handleEdit = (index: number, row: AddEditStudentFormType) => {
 }
 const EditDialogConfirm = () => {
   let stuForm = editStudentRef.value?.AddEditStudentForm
-  let stuItme = studentTableData.value?.find((item, i) => item.id == stuForm?.id)
+  // let stuItme = studentTableData.value?.find((item, i) => item.id == stuForm?.id)
+  let stuItme = paginationData.value?.find((item, i) => item.id == stuForm?.id)
   if (!stuForm || !stuItme) return
   Object.keys(stuItme).forEach((key, i) => {
     stuItme[key] = stuForm[key]

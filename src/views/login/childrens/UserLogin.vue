@@ -53,7 +53,7 @@ const nowLogin = async () => {
       instance?.proxy?.$message.success(res.message)
       localStorage.setItem("testToken", res.token)
       localStorage.setItem("testUser", JSON.stringify(userForm))
-      router.replace("/main")
+      router.replace("/")
     } else {
       instance?.proxy?.$message.error(res.message)
     }

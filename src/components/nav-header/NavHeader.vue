@@ -40,6 +40,9 @@ import type { ComputedRef, Ref } from "vue";
 import { useRoute, useRouter } from 'vue-router'
 import { Fold } from '@element-plus/icons-vue'
 import { reqIp, reqWeather } from "@/serves/api";
+import { useCovidInfoStore } from "@/stores/userInfo"
+
+const covidInfoStore = useCovidInfoStore()
 
 const instance = getCurrentInstance()
 const route = useRoute()
@@ -80,6 +83,7 @@ const getIp = async () => {
     console.log(res);
     let province: string = res.province
     instance?.proxy?.$Bus.emit('showAreaCovid', province)
+    covidInfoStore.city = province
     if (res.status == "1") {
       getWeather(res.adcode)
     }

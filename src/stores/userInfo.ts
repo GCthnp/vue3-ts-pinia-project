@@ -18,6 +18,7 @@ export const useCovidInfoStore = defineStore({
     chinaTotal: <ChinaTotal>{},
     cityDetail: <StatisGradeCityDetail[]>[],
     allAreaTree: <AreaTree[]>[],
+    city: <string>'',
   }),
   getters: {},
   actions: {
@@ -36,9 +37,10 @@ export const useCovidInfoStore = defineStore({
       this.allAreaTree = this.list.diseaseh5Shelf.areaTree[0].children
     },
     setCityItem(city: string) {
-      console.log(city)
-      // console.log(this.allAreaTree)
-      let cityItem = this.allAreaTree.find((item) => city.includes(item.name))
+      let nowCity = city ?? this.city
+      let cityItem = this.allAreaTree.find((item) =>
+        nowCity.includes(item.name)
+      )
       if (cityItem) {
         this.item = cityItem?.children
       }
